@@ -1,0 +1,538 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		640FC1CA1E82C642002823E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640FC1C91E82C642002823E8 /* AppDelegate.swift */; };
+		640FC1CC1E82C642002823E8 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640FC1CB1E82C642002823E8 /* BoardViewController.swift */; };
+		640FC1CF1E82C642002823E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 640FC1CD1E82C642002823E8 /* Main.storyboard */; };
+		640FC1D11E82C642002823E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 640FC1D01E82C642002823E8 /* Assets.xcassets */; };
+		640FC1D41E82C642002823E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 640FC1D21E82C642002823E8 /* LaunchScreen.storyboard */; };
+		640FC1DF1E82C642002823E8 /* Connect_FourTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640FC1DE1E82C642002823E8 /* Connect_FourTests.swift */; };
+		640FC1EA1E82C642002823E8 /* Connect_FourUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640FC1E91E82C642002823E8 /* Connect_FourUITests.swift */; };
+		641D2B2C1E8A92920084967B /* BoardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641D2B2B1E8A92920084967B /* BoardData.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		640FC1DB1E82C642002823E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 640FC1BE1E82C641002823E8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 640FC1C51E82C641002823E8;
+			remoteInfo = "Connect Four";
+		};
+		640FC1E61E82C642002823E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 640FC1BE1E82C641002823E8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 640FC1C51E82C641002823E8;
+			remoteInfo = "Connect Four";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		640FC1C61E82C642002823E8 /* Connect Four.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Connect Four.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		640FC1C91E82C642002823E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		640FC1CB1E82C642002823E8 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
+		640FC1CE1E82C642002823E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		640FC1D01E82C642002823E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		640FC1D31E82C642002823E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		640FC1D51E82C642002823E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		640FC1DA1E82C642002823E8 /* Connect FourTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Connect FourTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		640FC1DE1E82C642002823E8 /* Connect_FourTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect_FourTests.swift; sourceTree = "<group>"; };
+		640FC1E01E82C642002823E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		640FC1E51E82C642002823E8 /* Connect FourUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Connect FourUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		640FC1E91E82C642002823E8 /* Connect_FourUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect_FourUITests.swift; sourceTree = "<group>"; };
+		640FC1EB1E82C642002823E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		641D2B2B1E8A92920084967B /* BoardData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardData.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		640FC1C31E82C641002823E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		640FC1D71E82C642002823E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		640FC1E21E82C642002823E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		640FC1BD1E82C641002823E8 = {
+			isa = PBXGroup;
+			children = (
+				640FC1C81E82C642002823E8 /* Connect Four */,
+				640FC1DD1E82C642002823E8 /* Connect FourTests */,
+				640FC1E81E82C642002823E8 /* Connect FourUITests */,
+				640FC1C71E82C642002823E8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		640FC1C71E82C642002823E8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				640FC1C61E82C642002823E8 /* Connect Four.app */,
+				640FC1DA1E82C642002823E8 /* Connect FourTests.xctest */,
+				640FC1E51E82C642002823E8 /* Connect FourUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		640FC1C81E82C642002823E8 /* Connect Four */ = {
+			isa = PBXGroup;
+			children = (
+				640FC1C91E82C642002823E8 /* AppDelegate.swift */,
+				640FC1CB1E82C642002823E8 /* BoardViewController.swift */,
+				641D2B2B1E8A92920084967B /* BoardData.swift */,
+				640FC1CD1E82C642002823E8 /* Main.storyboard */,
+				640FC1D01E82C642002823E8 /* Assets.xcassets */,
+				640FC1D21E82C642002823E8 /* LaunchScreen.storyboard */,
+				640FC1D51E82C642002823E8 /* Info.plist */,
+			);
+			path = "Connect Four";
+			sourceTree = "<group>";
+		};
+		640FC1DD1E82C642002823E8 /* Connect FourTests */ = {
+			isa = PBXGroup;
+			children = (
+				640FC1DE1E82C642002823E8 /* Connect_FourTests.swift */,
+				640FC1E01E82C642002823E8 /* Info.plist */,
+			);
+			path = "Connect FourTests";
+			sourceTree = "<group>";
+		};
+		640FC1E81E82C642002823E8 /* Connect FourUITests */ = {
+			isa = PBXGroup;
+			children = (
+				640FC1E91E82C642002823E8 /* Connect_FourUITests.swift */,
+				640FC1EB1E82C642002823E8 /* Info.plist */,
+			);
+			path = "Connect FourUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		640FC1C51E82C641002823E8 /* Connect Four */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 640FC1EE1E82C642002823E8 /* Build configuration list for PBXNativeTarget "Connect Four" */;
+			buildPhases = (
+				640FC1C21E82C641002823E8 /* Sources */,
+				640FC1C31E82C641002823E8 /* Frameworks */,
+				640FC1C41E82C641002823E8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Connect Four";
+			productName = "Connect Four";
+			productReference = 640FC1C61E82C642002823E8 /* Connect Four.app */;
+			productType = "com.apple.product-type.application";
+		};
+		640FC1D91E82C642002823E8 /* Connect FourTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 640FC1F11E82C642002823E8 /* Build configuration list for PBXNativeTarget "Connect FourTests" */;
+			buildPhases = (
+				640FC1D61E82C642002823E8 /* Sources */,
+				640FC1D71E82C642002823E8 /* Frameworks */,
+				640FC1D81E82C642002823E8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				640FC1DC1E82C642002823E8 /* PBXTargetDependency */,
+			);
+			name = "Connect FourTests";
+			productName = "Connect FourTests";
+			productReference = 640FC1DA1E82C642002823E8 /* Connect FourTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		640FC1E41E82C642002823E8 /* Connect FourUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 640FC1F41E82C642002823E8 /* Build configuration list for PBXNativeTarget "Connect FourUITests" */;
+			buildPhases = (
+				640FC1E11E82C642002823E8 /* Sources */,
+				640FC1E21E82C642002823E8 /* Frameworks */,
+				640FC1E31E82C642002823E8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				640FC1E71E82C642002823E8 /* PBXTargetDependency */,
+			);
+			name = "Connect FourUITests";
+			productName = "Connect FourUITests";
+			productReference = 640FC1E51E82C642002823E8 /* Connect FourUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		640FC1BE1E82C641002823E8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Igor Zhariy";
+				TargetAttributes = {
+					640FC1C51E82C641002823E8 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 57728QK35Z;
+						ProvisioningStyle = Automatic;
+					};
+					640FC1D91E82C642002823E8 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 640FC1C51E82C641002823E8;
+					};
+					640FC1E41E82C642002823E8 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 640FC1C51E82C641002823E8;
+					};
+				};
+			};
+			buildConfigurationList = 640FC1C11E82C641002823E8 /* Build configuration list for PBXProject "Connect Four" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 640FC1BD1E82C641002823E8;
+			productRefGroup = 640FC1C71E82C642002823E8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				640FC1C51E82C641002823E8 /* Connect Four */,
+				640FC1D91E82C642002823E8 /* Connect FourTests */,
+				640FC1E41E82C642002823E8 /* Connect FourUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		640FC1C41E82C641002823E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				640FC1D41E82C642002823E8 /* LaunchScreen.storyboard in Resources */,
+				640FC1D11E82C642002823E8 /* Assets.xcassets in Resources */,
+				640FC1CF1E82C642002823E8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		640FC1D81E82C642002823E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		640FC1E31E82C642002823E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		640FC1C21E82C641002823E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				640FC1CC1E82C642002823E8 /* BoardViewController.swift in Sources */,
+				640FC1CA1E82C642002823E8 /* AppDelegate.swift in Sources */,
+				641D2B2C1E8A92920084967B /* BoardData.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		640FC1D61E82C642002823E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				640FC1DF1E82C642002823E8 /* Connect_FourTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		640FC1E11E82C642002823E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				640FC1EA1E82C642002823E8 /* Connect_FourUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		640FC1DC1E82C642002823E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 640FC1C51E82C641002823E8 /* Connect Four */;
+			targetProxy = 640FC1DB1E82C642002823E8 /* PBXContainerItemProxy */;
+		};
+		640FC1E71E82C642002823E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 640FC1C51E82C641002823E8 /* Connect Four */;
+			targetProxy = 640FC1E61E82C642002823E8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		640FC1CD1E82C642002823E8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				640FC1CE1E82C642002823E8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		640FC1D21E82C642002823E8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				640FC1D31E82C642002823E8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		640FC1EC1E82C642002823E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		640FC1ED1E82C642002823E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		640FC1EF1E82C642002823E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 57728QK35Z;
+				INFOPLIST_FILE = "Connect Four/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.igorzhariy.Connect-Four";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		640FC1F01E82C642002823E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 57728QK35Z;
+				INFOPLIST_FILE = "Connect Four/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.igorzhariy.Connect-Four";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		640FC1F21E82C642002823E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Connect FourTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "igorzhariy.Connect-FourTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Connect Four.app/Connect Four";
+			};
+			name = Debug;
+		};
+		640FC1F31E82C642002823E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Connect FourTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "igorzhariy.Connect-FourTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Connect Four.app/Connect Four";
+			};
+			name = Release;
+		};
+		640FC1F51E82C642002823E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = "Connect FourUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "igorzhariy.Connect-FourUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Connect Four";
+			};
+			name = Debug;
+		};
+		640FC1F61E82C642002823E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = "Connect FourUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "igorzhariy.Connect-FourUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Connect Four";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		640FC1C11E82C641002823E8 /* Build configuration list for PBXProject "Connect Four" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				640FC1EC1E82C642002823E8 /* Debug */,
+				640FC1ED1E82C642002823E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		640FC1EE1E82C642002823E8 /* Build configuration list for PBXNativeTarget "Connect Four" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				640FC1EF1E82C642002823E8 /* Debug */,
+				640FC1F01E82C642002823E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		640FC1F11E82C642002823E8 /* Build configuration list for PBXNativeTarget "Connect FourTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				640FC1F21E82C642002823E8 /* Debug */,
+				640FC1F31E82C642002823E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		640FC1F41E82C642002823E8 /* Build configuration list for PBXNativeTarget "Connect FourUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				640FC1F51E82C642002823E8 /* Debug */,
+				640FC1F61E82C642002823E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 640FC1BE1E82C641002823E8 /* Project object */;
+}
