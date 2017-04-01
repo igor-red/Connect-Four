@@ -32,7 +32,7 @@ Probably use a two-dimensional array to keep track of the progress. Maybe refact
 
 ## Reasoning for what was achieved
 
-The game was created with one goal in mind - achieve best functionality/value for time spent. As a result we have a fully functional and a bit customizable game (because who wants to play one board size over and over again!) where additional polish would take unreasonable in real life additional time and effort.
+The game was created with one goal in mind - achieve best functionality/value for time spent. As a result we have a fully functional and a bit customizable game (because who wants to play one board size over and over again!) where additional polish would take unreasonable in real life additional time and effort. Overall time spent: 2h for the model, 3h for the UI, 1h for fixes along the way.
 
 ## Links to other projects
 
