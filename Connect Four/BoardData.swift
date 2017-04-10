@@ -29,14 +29,15 @@ class BoardData: NSObject {
     var columns: Int = 0
     var tappedItemIndex: Int = 0
     var userTurn: Int = 1
-    var boardState = [Int]()
-    var winningIndexes = [Int]()
+    var boardState = [[Int]]()
+    var winningIndexes = [(Int, Int)]()
     var tappedItem = (row: 0,column: 0) {
         didSet {
             for row in (0 ..< rows).reversed() {
                 tappedItemIndex = row * columns + tappedItem.column
-                if boardState[tappedItemIndex] == 0 {
-                    boardState[tappedItemIndex] = userTurn
+                if boardState[row][tappedItem.column] == 0 {
+                    tappedItem.row = row
+                    boardState[row][tappedItem.column] = userTurn
                     break
                 }
             }
@@ -54,7 +55,9 @@ class BoardData: NSObject {
     
     func cleanBoard() {
         gameStatus = .new
-        boardState = Array(repeating: 0, count: items)
+        userTurn = 1
+        winningIndexes.removeAll()
+        boardState = Array(repeatElement(Array(repeating: 0, count: columns), count: rows))
     }
     
     func updateUserTurn() {
@@ -63,57 +66,60 @@ class BoardData: NSObject {
     }
     
     func checkIfUserWon() {
-        print ("New tapped item")
-        checkArray(array: getHorizontalLine())
-        checkArray(array: getVerticalLine())
-        checkArray(array: getDiagonalLine(reversed: false))
-        checkArray(array: getDiagonalLine(reversed: true))
+        //print ("New tapped item")
+        checkArray(arrayOfPositions: getHorizontalLine())
+        checkArray(arrayOfPositions: getVerticalLine())
+        checkArray(arrayOfPositions: getDiagonalLine(reversed: false))
+        checkArray(arrayOfPositions: getDiagonalLine(reversed: true))
         switch gameStatus {
         case .someoneWon:
-            print ("Player \(userTurn) won")
+            //print ("Player \(userTurn) won")
             delegate?.endGame()
         default:
             self.updateUserTurn()
         }
     }
     
-    func getHorizontalLine() -> [Int] {
-        let tappedItemIndexRow = tappedItemIndex / columns
-        return Array(boardState[tappedItemIndexRow * columns ..< (tappedItemIndexRow + 1) * columns])
+    func getHorizontalLine() -> [(Int, Int)] {
+        return Array(zip(Array.init(repeating: tappedItem.row, count: columns), (0 ..< columns).map { $0 }))
     }
     
-    func getVerticalLine() -> [Int] {
-        var array = [Int]()
-        for row in 0 ..< rows {
-            array.append(boardState[columns * row + tappedItem.column])
-        }
-        return array
+    func getVerticalLine() -> [(Int, Int)] {
+        return Array(zip((0 ..< rows).map { $0 }, Array.init(repeating: tappedItem.column, count: rows) ))
     }
     
-    func getDiagonalLine(reversed: Bool) -> [Int] {
+    func getDiagonalLine(reversed: Bool) -> [(Int, Int)] {
+        
+        let reversedIndex = reversed ? -1 : 1
         let firstBorder = reversed ? columns - 1 : 0
         let secondBorder = reversed ? 0 : columns - 1
+        var firstItemPosition = (row : tappedItem.row, column: tappedItem.column)
         
-        var firstDiagLineItemIndex = tappedItemIndex
-        let directionIndex = reversed ? -1 : 1
-        while firstDiagLineItemIndex - columns - directionIndex >= 0 && firstDiagLineItemIndex % columns != firstBorder {
-            firstDiagLineItemIndex -= columns + directionIndex
+        while firstItemPosition.row != 0 && firstItemPosition.column != firstBorder {
+            firstItemPosition.row -= 1
+            firstItemPosition.column -= reversedIndex
         }
-        var array = Array.init(arrayLiteral: boardState[firstDiagLineItemIndex])
-        while firstDiagLineItemIndex + columns + directionIndex < boardState.count && firstDiagLineItemIndex % columns != secondBorder {
-            firstDiagLineItemIndex += columns + directionIndex
-            array.append(boardState[firstDiagLineItemIndex])
+        var array = Array.init(arrayLiteral: (firstItemPosition.row,firstItemPosition.column))
+        while firstItemPosition.row < rows - 1 && firstItemPosition.column != secondBorder {
+            firstItemPosition.row += 1
+            firstItemPosition.column += reversedIndex
+            array.append((firstItemPosition.row, firstItemPosition.column))
         }
         return array
     }
     
-    func checkArray(array: [Int]) {
-        print (array)
-        guard array.count >= 4 else { return }
-        for i in 0 ... array.count - 4 {
-            if Set(array[i..<i+4]).count == 1 && array[i] != 0 {
+    func checkArray(arrayOfPositions: [(row: Int, column: Int)]) {
+        //print (arrayOfPositions)
+        var arrayOfItems = [Int]()
+        arrayOfPositions.forEach( { arrayOfItems.append(boardState[$0.row][$0.column]) } )
+        
+        //print (arrayOfItems)
+        guard arrayOfItems.count >= 4 else { return }
+        for i in 0 ... arrayOfItems.count - 4 {
+            if Set(arrayOfItems[i ..< i + 4]).count == 1 && arrayOfItems[i] != 0 {
                 gameStatus = .someoneWon
-                
+                winningIndexes = Array(arrayOfPositions[i ..< i + 4])
+                winningIndexes.forEach( { boardState[$0.0][$0.1] = 3 } )
             }
         }
     }

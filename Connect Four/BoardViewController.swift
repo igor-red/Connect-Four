@@ -54,11 +54,13 @@ class BoardViewController: UIViewController, UICollectionViewDelegate, UICollect
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! BoardCell
         cell.itemCircle.layer.cornerRadius = CGFloat(cellWidth - 4) / 2
         
-        switch boardData!.boardState[indexPath.row] {
+        switch boardData!.boardState[indexPath.row / boardSize.columns][indexPath.row % boardSize.columns] {
         case 1:
             cell.itemCircle.backgroundColor = UIColor.red
         case 2:
             cell.itemCircle.backgroundColor = UIColor.black
+        case 3:
+            cell.itemCircle.backgroundColor = UIColor.green
         default:
             cell.itemCircle.backgroundColor = UIColor.clear
         }
@@ -66,7 +68,7 @@ class BoardViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard boardData?.boardState[indexPath.row % boardSize.columns] == 0 else { return }
+        guard boardData?.boardState[0][indexPath.row % boardSize.columns] == 0 else { return }
         boardData?.tappedItem = (indexPath.row / boardSize.columns, indexPath.row % boardSize.columns)
         boardCV.reloadItems(at: [IndexPath(row: boardData!.tappedItemIndex, section: 0)])
     }
@@ -82,14 +84,16 @@ class BoardViewController: UIViewController, UICollectionViewDelegate, UICollect
 }
 
 extension BoardViewController: BoardDataDelegate {
-    
+        
     func endGame() {
         highlightWinner()
-        newGameButton.isHidden = false
+        showWinningCombination()
+        newGameButton.setTitle("New Game", for: .normal)
         boardCV.isUserInteractionEnabled = false
     }
     
     func switchPlayers() {
+        newGameButton.isHidden = false
         playerOneLabel.isHidden = boardData?.userTurn != 1
         playerTwoLabel.isHidden = boardData?.userTurn != 2
     }
@@ -144,6 +148,7 @@ extension BoardViewController {
     
     func setupVisuals() {
         setupCellSize()
+        resetLabelColors()
         playerOneLabel.layer.cornerRadius = 5
         playerOneLabel.layer.masksToBounds = true
         playerTwoLabel.layer.cornerRadius = 5
@@ -166,24 +171,39 @@ extension BoardViewController {
     
     func resetGame() {
         newGameButton.isHidden = true
+        newGameButton.setTitle("Restart Game", for: .normal)
         playerOneLabel.text = "Player 1 Turn"
-        playerOneLabel.backgroundColor = UIColor.clear
-        playerTwoLabel.text = "Player 2 Turn"
-        playerTwoLabel.backgroundColor = UIColor.clear
         playerOneLabel.isHidden = false
+        playerTwoLabel.text = "Player 2 Turn"
         playerTwoLabel.isHidden = true
+        resetLabelColors()
+    }
+    
+    func resetLabelColors() {
+        playerOneLabel.textColor = UIColor.white
+        playerOneLabel.backgroundColor = UIColor.red
+        playerTwoLabel.textColor = UIColor.white
+        playerTwoLabel.backgroundColor = UIColor.black
     }
     
     func highlightWinner() {
         switch boardData!.userTurn {
         case 1:
             playerOneLabel.text = "Player 1 Won!"
+            playerOneLabel.textColor = UIColor.red
             playerOneLabel.backgroundColor = UIColor.green
         default:
             playerTwoLabel.text = "Player 2 Won!"
+            playerTwoLabel.textColor = UIColor.black
             playerTwoLabel.backgroundColor = UIColor.green
         }
-        
+    }
+    
+    func showWinningCombination() {
+        boardData!.winningIndexes.forEach( {
+            let row = $0.0 * boardSize.columns + $0.1
+            boardCV.reloadItems(at: [IndexPath(row: row, section: 0)])
+        } )
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

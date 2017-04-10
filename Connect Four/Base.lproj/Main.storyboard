@@ -63,7 +63,7 @@
                             </collectionView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWP-o5-Mmm">
                                 <rect key="frame" x="122" y="40" width="130" height="50"/>
-                                <state key="normal" title="New game"/>
+                                <state key="normal" title="Restart Game"/>
                                 <connections>
                                     <action selector="newGameButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sLt-mu-mO6"/>
                                 </connections>
@@ -75,7 +75,7 @@
                                     <constraint firstAttribute="width" constant="130" id="jby-Ne-Rk7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2 Turn" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggK-4d-TYt">
