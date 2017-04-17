@@ -67,10 +67,11 @@ class BoardData: NSObject {
     
     func checkIfUserWon() {
         //print ("New tapped item")
-        checkArray(arrayOfPositions: getHorizontalLine())
-        checkArray(arrayOfPositions: getVerticalLine())
-        checkArray(arrayOfPositions: getDiagonalLine(reversed: false))
-        checkArray(arrayOfPositions: getDiagonalLine(reversed: true))
+        let tappedItemLocation = (tappedItem.row, tappedItem.column)
+        checkArray(arrayOfPositions: getHorizontalLine(location: tappedItemLocation))
+        checkArray(arrayOfPositions: getVerticalLine(location: tappedItemLocation))
+        checkArray(arrayOfPositions: getDiagonalLine(location: tappedItemLocation, reversed: false))
+        checkArray(arrayOfPositions: getDiagonalLine(location: tappedItemLocation, reversed: true))
         switch gameStatus {
         case .someoneWon:
             //print ("Player \(userTurn) won")
@@ -80,20 +81,20 @@ class BoardData: NSObject {
         }
     }
     
-    func getHorizontalLine() -> [(Int, Int)] {
-        return Array(zip(Array.init(repeating: tappedItem.row, count: columns), (0 ..< columns).map { $0 }))
+    func getHorizontalLine(location: (row: Int, column: Int)) -> [(Int, Int)] {
+        return Array(zip(Array.init(repeating: location.row, count: columns), (0 ..< columns).map { $0 }))
     }
     
-    func getVerticalLine() -> [(Int, Int)] {
-        return Array(zip((0 ..< rows).map { $0 }, Array.init(repeating: tappedItem.column, count: rows) ))
+    func getVerticalLine(location: (row: Int, column: Int)) -> [(Int, Int)] {
+        return Array(zip((0 ..< rows).map { $0 }, Array.init(repeating: location.column, count: rows) ))
     }
     
-    func getDiagonalLine(reversed: Bool) -> [(Int, Int)] {
+    func getDiagonalLine(location: (row: Int, column: Int), reversed: Bool) -> [(Int, Int)] {
         
         let reversedIndex = reversed ? -1 : 1
         let firstBorder = reversed ? columns - 1 : 0
         let secondBorder = reversed ? 0 : columns - 1
-        var firstItemPosition = (row : tappedItem.row, column: tappedItem.column)
+        var firstItemPosition = (row : location.row, column: location.column)
         
         while firstItemPosition.row != 0 && firstItemPosition.column != firstBorder {
             firstItemPosition.row -= 1
