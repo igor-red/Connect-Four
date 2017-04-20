@@ -10,7 +10,10 @@ import UIKit
 
 protocol BoardDataDelegate {
     func endGame()
+    func draw()
     func switchPlayers()
+    func reloadItem()
+    func makeTurnAI(column: Int)
 }
 
 class BoardData: NSObject {
@@ -30,18 +33,29 @@ class BoardData: NSObject {
     var tappedItemIndex: Int = 0
     var userTurn: Int = 1
     var boardState = [[Int]]()
-    var winningIndexes = [(Int, Int)]()
+    var gamingVersusAI = true
+    var winningPositions = [(Int, Int)]()
+    var possibleTurnPositions = [(Int, Int)]()
+    var loosingThreatPosition: (Int, Int) = (-1, -1)
+    var winningOpportunityPosition: (Int, Int) = (-1, -1)
     var tappedItem = (row: 0,column: 0) {
         didSet {
             for row in (0 ..< rows).reversed() {
-                tappedItemIndex = row * columns + tappedItem.column
                 if boardState[row][tappedItem.column] == 0 {
                     tappedItem.row = row
                     boardState[row][tappedItem.column] = userTurn
+                    tappedItemIndex = row * columns + tappedItem.column
+                    delegate?.reloadItem()
                     break
                 }
             }
-            self.checkIfUserWon()
+            possibleTurnPositions = getPossibleTurnPositions()
+            if !self.checkIfAnyoneWon() {
+                if gamingVersusAI && userTurn == 2 {
+                    self.checkIfThreatOpportunity()
+                    self.makeTurnAI()
+                }
+            }
         }
     }
     
@@ -55,8 +69,10 @@ class BoardData: NSObject {
     
     func cleanBoard() {
         gameStatus = .new
+        loosingThreatPosition = (-1, -1)
+        winningOpportunityPosition = (-1, -1)
         userTurn = 1
-        winningIndexes.removeAll()
+        winningPositions.removeAll()
         boardState = Array(repeatElement(Array(repeating: 0, count: columns), count: rows))
     }
     
@@ -65,36 +81,69 @@ class BoardData: NSObject {
         delegate?.switchPlayers()
     }
     
-    func checkIfUserWon() {
-        //print ("New tapped item")
+    func checkIfAnyoneWon() -> Bool {
+        if possibleTurnPositions.count == 0 { gameStatus = .draw }
         let tappedItemLocation = (tappedItem.row, tappedItem.column)
-        checkArray(arrayOfPositions: getHorizontalLine(location: tappedItemLocation))
-        checkArray(arrayOfPositions: getVerticalLine(location: tappedItemLocation))
-        checkArray(arrayOfPositions: getDiagonalLine(location: tappedItemLocation, reversed: false))
-        checkArray(arrayOfPositions: getDiagonalLine(location: tappedItemLocation, reversed: true))
+        checkWinningPosition(arrayOfPositions: getHorizontalLine(fromLocation: tappedItemLocation))
+        checkWinningPosition(arrayOfPositions: getVerticalLine(fromLocation: tappedItemLocation))
+        checkWinningPosition(arrayOfPositions: getDiagonalLine(fromLocation: tappedItemLocation, reversed: false))
+        checkWinningPosition(arrayOfPositions: getDiagonalLine(fromLocation: tappedItemLocation, reversed: true))
         switch gameStatus {
         case .someoneWon:
-            //print ("Player \(userTurn) won")
             delegate?.endGame()
+            return true
+        case .draw:
+            delegate?.draw()
+            return true
         default:
             self.updateUserTurn()
+            return false
         }
     }
     
-    func getHorizontalLine(location: (row: Int, column: Int)) -> [(Int, Int)] {
-        return Array(zip(Array.init(repeating: location.row, count: columns), (0 ..< columns).map { $0 }))
+    func checkIfThreatOpportunity() {
+        loosingThreatPosition = (-1, -1)
+        winningOpportunityPosition = (-1, -1)
+        possibleTurnPositions.forEach({ position in
+            checkThreatOpportunityPosition(arrayOfPositions: getHorizontalLine(fromLocation: (position.0, position.1)))
+            checkThreatOpportunityPosition(arrayOfPositions: getVerticalLine(fromLocation: (position.0, position.1)))
+            checkThreatOpportunityPosition(arrayOfPositions: getDiagonalLine(fromLocation: (position.0, position.1), reversed: false))
+            checkThreatOpportunityPosition(arrayOfPositions: getDiagonalLine(fromLocation: (position.0, position.1), reversed: true))
+        })
     }
     
-    func getVerticalLine(location: (row: Int, column: Int)) -> [(Int, Int)] {
-        return Array(zip((0 ..< rows).map { $0 }, Array.init(repeating: location.column, count: rows) ))
+    func makeTurnAI() {
+        var column = -1
+        if loosingThreatPosition != (-1, -1) && winningOpportunityPosition == (-1, -1) { column = loosingThreatPosition.1 }
+        if winningOpportunityPosition != (-1, -1) && winningOpportunityPosition != (-1, -1) { column = winningOpportunityPosition.1 }
+        if column == -1 { column = generateRandomColumn() }
+        delegate?.makeTurnAI(column: column)
     }
     
-    func getDiagonalLine(location: (row: Int, column: Int), reversed: Bool) -> [(Int, Int)] {
+    func generateRandomColumn() -> Int {
+        var possibleColumn = -1
+        var columnGenerated = false
+        while !columnGenerated {
+            possibleColumn = Int(arc4random_uniform(UInt32(columns)))
+            possibleTurnPositions.forEach({ if possibleColumn == $0.1 { columnGenerated = true } })
+        }
+        return possibleColumn
+    }
+    
+    func getHorizontalLine(fromLocation: (row: Int, column: Int)) -> [(Int, Int)] {
+        return Array(zip(Array.init(repeating: fromLocation.row, count: columns), (0 ..< columns).map { $0 }))
+    }
+    
+    func getVerticalLine(fromLocation: (row: Int, column: Int)) -> [(Int, Int)] {
+        return Array(zip((0 ..< rows).map { $0 }, Array.init(repeating: fromLocation.column, count: rows) ))
+    }
+    
+    func getDiagonalLine(fromLocation: (row: Int, column: Int), reversed: Bool) -> [(Int, Int)] {
         
         let reversedIndex = reversed ? -1 : 1
         let firstBorder = reversed ? columns - 1 : 0
         let secondBorder = reversed ? 0 : columns - 1
-        var firstItemPosition = (row : location.row, column: location.column)
+        var firstItemPosition = (row : fromLocation.row, column: fromLocation.column)
         
         while firstItemPosition.row != 0 && firstItemPosition.column != firstBorder {
             firstItemPosition.row -= 1
@@ -109,19 +158,47 @@ class BoardData: NSObject {
         return array
     }
     
-    func checkArray(arrayOfPositions: [(row: Int, column: Int)]) {
-        //print (arrayOfPositions)
+    func getPossibleTurnPositions() -> [(Int, Int)] {
+        var array = [(Int, Int)]()
+        for column in 0 ..< columns {
+            for row in (0 ..< rows).reversed() {
+                if boardState[row][column] == 0 {
+                    array.append((row, column))
+                    break
+                }
+            }
+        }
+        return array
+    }
+    
+    func checkWinningPosition(arrayOfPositions: [(row: Int, column: Int)]) {
         var arrayOfItems = [Int]()
         arrayOfPositions.forEach( { arrayOfItems.append(boardState[$0.row][$0.column]) } )
         
-        //print (arrayOfItems)
         guard arrayOfItems.count >= 4 else { return }
         for i in 0 ... arrayOfItems.count - 4 {
             if Set(arrayOfItems[i ..< i + 4]).count == 1 && arrayOfItems[i] != 0 {
                 gameStatus = .someoneWon
-                winningIndexes = Array(arrayOfPositions[i ..< i + 4])
-                winningIndexes.forEach( { boardState[$0.0][$0.1] = 3 } )
+                winningPositions = Array(arrayOfPositions[i ..< i + 4])
+                winningPositions.forEach({ boardState[$0.0][$0.1] = 3 })
             }
+        }
+    }
+    
+    func checkThreatOpportunityPosition(arrayOfPositions: [(row: Int, column: Int)]) {
+        var arrayOfItems = [Int]()
+        arrayOfPositions.forEach( { arrayOfItems.append(boardState[$0.row][$0.column]) } )
+        
+        guard arrayOfItems.count >= 4 else { return }
+        for i in 0 ... arrayOfItems.count - 4 {
+            if arrayOfItems[i ..< i + 4] == [0, 1, 1, 1] { loosingThreatPosition = arrayOfPositions[i] }
+            if arrayOfItems[i ..< i + 4] == [1, 0, 1, 1] { loosingThreatPosition = arrayOfPositions[i + 1] }
+            if arrayOfItems[i ..< i + 4] == [1, 1, 0, 1] { loosingThreatPosition = arrayOfPositions[i + 2] }
+            if arrayOfItems[i ..< i + 4] == [1, 1, 1, 0] { loosingThreatPosition = arrayOfPositions[i + 3] }
+            if arrayOfItems[i ..< i + 4] == [0, 2, 2, 2] { winningOpportunityPosition = arrayOfPositions[i] }
+            if arrayOfItems[i ..< i + 4] == [2, 0, 2, 2] { winningOpportunityPosition = arrayOfPositions[i + 1] }
+            if arrayOfItems[i ..< i + 4] == [2, 2, 0, 2] { winningOpportunityPosition = arrayOfPositions[i + 2] }
+            if arrayOfItems[i ..< i + 4] == [2, 2, 2, 0] { winningOpportunityPosition = arrayOfPositions[i + 3] }
         }
     }
 }

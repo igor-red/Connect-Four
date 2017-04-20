@@ -61,8 +61,21 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="YMB-Be-38T"/>
                                 </connections>
                             </collectionView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="biq-J9-T55">
+                                <rect key="frame" x="87" y="51" width="200" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="SDt-bu-2Dt"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="One Player"/>
+                                    <segment title="Two Players"/>
+                                </segments>
+                                <connections>
+                                    <action selector="playerSelectionSegmentedControlChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="9ej-vL-XoI"/>
+                                </connections>
+                            </segmentedControl>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWP-o5-Mmm">
-                                <rect key="frame" x="122" y="40" width="130" height="50"/>
+                                <rect key="frame" x="122.5" y="40" width="130" height="50"/>
                                 <state key="normal" title="Restart Game"/>
                                 <connections>
                                     <action selector="newGameButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sLt-mu-mO6"/>
@@ -121,12 +134,14 @@
                             <constraint firstItem="0V3-Nh-XZb" firstAttribute="leading" secondItem="1Rr-cw-OP9" secondAttribute="trailing" constant="20" id="Mbh-wO-21H"/>
                             <constraint firstItem="0V3-Nh-XZb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Nrg-Na-4tG"/>
                             <constraint firstItem="SjH-6f-6SG" firstAttribute="leading" secondItem="0V3-Nh-XZb" secondAttribute="trailing" constant="20" id="Qev-hX-RL9"/>
+                            <constraint firstItem="biq-J9-T55" firstAttribute="centerY" secondItem="zWP-o5-Mmm" secondAttribute="centerY" id="TC0-7H-wuC"/>
                             <constraint firstAttribute="leadingMargin" secondItem="ibR-Gn-vpU" secondAttribute="leading" id="X9t-Xz-03v"/>
                             <constraint firstItem="zWP-o5-Mmm" firstAttribute="width" secondItem="ibR-Gn-vpU" secondAttribute="width" id="bPO-5Y-6Zq"/>
                             <constraint firstItem="zWP-o5-Mmm" firstAttribute="height" secondItem="ibR-Gn-vpU" secondAttribute="height" id="dZs-gt-exh"/>
                             <constraint firstItem="SjH-6f-6SG" firstAttribute="centerY" secondItem="0V3-Nh-XZb" secondAttribute="centerY" id="gwt-Ty-xMj"/>
                             <constraint firstItem="SjH-6f-6SG" firstAttribute="height" secondItem="0V3-Nh-XZb" secondAttribute="height" id="jGn-eG-3cO"/>
                             <constraint firstItem="ggK-4d-TYt" firstAttribute="width" secondItem="ibR-Gn-vpU" secondAttribute="width" id="jtY-It-hWW"/>
+                            <constraint firstItem="biq-J9-T55" firstAttribute="centerX" secondItem="zWP-o5-Mmm" secondAttribute="centerX" id="lGI-rz-0Uh"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0V3-Nh-XZb" secondAttribute="bottom" constant="20" id="mkL-Dy-4VU"/>
                             <constraint firstItem="0V3-Nh-XZb" firstAttribute="centerY" secondItem="1Rr-cw-OP9" secondAttribute="centerY" id="mu6-3r-MAm"/>
                             <constraint firstAttribute="trailing" secondItem="U3F-IW-bDy" secondAttribute="trailing" id="sby-Yg-pf9"/>
@@ -142,6 +157,7 @@
                         <outlet property="columnsTextField" destination="0V3-Nh-XZb" id="pQN-nV-sRW"/>
                         <outlet property="newGameButton" destination="zWP-o5-Mmm" id="apJ-ph-FBE"/>
                         <outlet property="playerOneLabel" destination="ibR-Gn-vpU" id="Hy0-cY-gZh"/>
+                        <outlet property="playerSelectionSegmentedControl" destination="biq-J9-T55" id="OzF-rs-59t"/>
                         <outlet property="playerTwoLabel" destination="ggK-4d-TYt" id="fqG-sE-Agm"/>
                         <outlet property="rowsTextField" destination="1Rr-cw-OP9" id="RHZ-vA-6nP"/>
                         <outlet property="topConstraint" destination="wo0-8Z-VwQ" id="4iH-VM-X3S"/>
@@ -150,7 +166,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-58" y="169"/>
+            <point key="canvasLocation" x="-58.399999999999999" y="168.6656671664168"/>
         </scene>
     </scenes>
 </document>

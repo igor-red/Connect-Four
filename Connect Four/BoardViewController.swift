@@ -18,9 +18,11 @@ class BoardViewController: UIViewController, UICollectionViewDelegate, UICollect
     @IBOutlet weak var columnsTextField: UITextField!
     @IBOutlet weak var updateBoardSizeButton: UIButton!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var playerSelectionSegmentedControl: UISegmentedControl!
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     let reuseIdentifier = "BoardCell"
+    let userDefaults = UserDefaults.standard
     var boardSize = (rows: 6,columns: 7)
     var cellWidth = 0
     var boardData: BoardData?
@@ -28,6 +30,10 @@ class BoardViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let savedBoardSize = userDefaults.object(forKey: "savedBoardSize") as? [String : Int] {
+            boardSize = (savedBoardSize["rows"]!, savedBoardSize["columns"]!)
+        }
+        
         boardData = BoardData(rows: boardSize.rows, columns: boardSize.columns)
         boardData?.delegate = self
         setupVisuals()
@@ -70,7 +76,6 @@ class BoardViewController: UIViewController, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard boardData?.boardState[0][indexPath.row % boardSize.columns] == 0 else { return }
         boardData?.tappedItem = (indexPath.row / boardSize.columns, indexPath.row % boardSize.columns)
-        boardCV.reloadItems(at: [IndexPath(row: boardData!.tappedItemIndex, section: 0)])
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -92,10 +97,30 @@ extension BoardViewController: BoardDataDelegate {
         boardCV.isUserInteractionEnabled = false
     }
     
+    func draw() {
+        playerOneLabel.isHidden = true
+        playerTwoLabel.isHidden = true
+        newGameButton.setTitle("Draw. Restart?", for: .normal)
+        boardCV.isUserInteractionEnabled = false
+    }
+    
     func switchPlayers() {
+        playerSelectionSegmentedControl.isHidden = true
         newGameButton.isHidden = false
         playerOneLabel.isHidden = boardData?.userTurn != 1
         playerTwoLabel.isHidden = boardData?.userTurn != 2
+    }
+    
+    func reloadItem() {
+        boardCV.reloadItems(at: [IndexPath(row: boardData!.tappedItemIndex, section: 0)])
+    }
+    
+    func makeTurnAI(column: Int) {
+        boardCV.isUserInteractionEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(500)) {
+            self.collectionView(self.boardCV, didSelectItemAt: IndexPath.init(row: column, section: 0))
+            self.boardCV.isUserInteractionEnabled = true
+        }
     }
     
     func changeBoardSize() {
@@ -122,12 +147,23 @@ extension BoardViewController {
         boardCV.isUserInteractionEnabled = true
     }
     
+    
+    @IBAction func playerSelectionSegmentedControlChanged(_ sender: Any) {
+        boardCV.selectItem(at: IndexPath.init(row: 3, section: 0), animated: true, scrollPosition: .top)
+        boardData?.gamingVersusAI = playerSelectionSegmentedControl.selectedSegmentIndex == 0
+    }
+    
     @IBAction func updateBoardSizeButtonTapped(_ sender: Any) {
         if (rowsTextField.text! != "" && columnsTextField.text! != "") {
             if (4 ... 10).contains(Int(rowsTextField.text!)!) && (4 ... 10).contains(Int(columnsTextField.text!)!)
             {
-                boardSize = (Int(rowsTextField.text!)!, Int(columnsTextField.text!)!)
+                let rows = Int(rowsTextField.text!)!
+                let columns = Int(columnsTextField.text!)!
+                boardSize = (rows, columns)
+                let savedBoardSize = ["rows" : rows, "columns" : columns]
                 changeBoardSize()
+                userDefaults.set(savedBoardSize, forKey: "savedBoardSize")
+                userDefaults.synchronize()
                 self.view.endEditing(true)
             } else {
                 let alert = UIAlertController(title: "Info", message: "Rows and columns should be no less than 4 and more than 10", preferredStyle: .alert)
@@ -171,6 +207,7 @@ extension BoardViewController {
     
     func resetGame() {
         newGameButton.isHidden = true
+        playerSelectionSegmentedControl.isHidden = false
         newGameButton.setTitle("Restart Game", for: .normal)
         playerOneLabel.text = "Player 1 Turn"
         playerOneLabel.isHidden = false
@@ -200,7 +237,7 @@ extension BoardViewController {
     }
     
     func showWinningCombination() {
-        boardData!.winningIndexes.forEach( {
+        boardData!.winningPositions.forEach( {
             let row = $0.0 * boardSize.columns + $0.1
             boardCV.reloadItems(at: [IndexPath(row: row, section: 0)])
         } )
